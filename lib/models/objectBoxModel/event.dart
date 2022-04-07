@@ -2,8 +2,7 @@ import 'package:objectbox/objectbox.dart';
 
 @Entity()
 @Sync()
-class Event
-{
+class Event {
   int id = 0;
   String firebaseUuid;
   String activityName;

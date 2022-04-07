@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:iexplore/homeScreen/home_screen.dart';
 import 'package:iexplore/main.dart';
-import 'package:iexplore/models/event.dart';
+import 'package:iexplore/models/objectBoxModel/event.dart' as object_box_event_model;
 import 'package:iexplore/objectbox.g.dart';
 import 'package:iexplore/widgets/custom/custom_date_picker_text_field.dart';
 import 'package:iexplore/widgets/custom/custom_time_picker_text_field.dart';
@@ -25,7 +25,7 @@ class _UploadReportAboutEventScreen extends State<UploadReportAboutEventScreen> 
   TextEditingController dateHeldController = TextEditingController();
   TextEditingController timeOfAttendingController = TextEditingController();
   TextEditingController nameOfReporterController = TextEditingController();
-  var _uuid = Uuid().v1().toString();
+  var _uuid = const Uuid().v1().toString();
 
   Future<void> saveData() async{
     final _activityName = activityNameController.text.trim();
@@ -34,7 +34,7 @@ class _UploadReportAboutEventScreen extends State<UploadReportAboutEventScreen> 
     final _timeOfAttending = timeOfAttendingController.text.isNotEmpty ? timeOfAttendingController.text.trim() : " ";
     final _nameOfReporter= nameOfReporterController.text.trim();
 
-    final ref = FirebaseFirestore.instance.collection("i-explore").doc(currentAccount!.firebaseUuid).collection("events").doc(_uuid).set({
+    await FirebaseFirestore.instance.collection("i-explore").doc(currentAccount!.firebaseUuid).collection("events").doc(_uuid).set({
       "firebaseUuid": _uuid,
       "activityName": _activityName,
       "location": _location,
@@ -44,7 +44,7 @@ class _UploadReportAboutEventScreen extends State<UploadReportAboutEventScreen> 
     });
 
     try {
-      await eventObjectBox.putAsync(Event(
+      await eventObjectBox.putAsync(object_box_event_model.Event(
           firebaseUuid: _uuid,
           activityName: _activityName,
           location: _location,
@@ -92,7 +92,7 @@ class _UploadReportAboutEventScreen extends State<UploadReportAboutEventScreen> 
       dateHeldController.clear();
       timeOfAttendingController.clear();
       nameOfReporterController.clear();
-      _uuid = Uuid().v1().toString();
+      _uuid = const Uuid().v1().toString();
     });
   }
 

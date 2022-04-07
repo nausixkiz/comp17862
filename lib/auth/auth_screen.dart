@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iexplore/auth/auth_login.dart';
 import 'package:iexplore/auth/auth_register.dart';
-import 'package:iexplore/extensions/color_extension.dart';
+// import 'package:iexplore/extensions/color_extension.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({Key? key}) : super(key: key);
@@ -11,7 +11,7 @@ class AuthScreen extends StatefulWidget {
 }
 
 class _AuthScreenState extends State<AuthScreen> {
-  final _red = '#fe5f75'.toColor();
+  // final _red = '#fe5f75'.toColor();
 
   @override
   Widget build(BuildContext context) {

@@ -4,8 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:iexplore/extensions/object_box.dart';
-import 'package:iexplore/models/account.dart';
-import 'package:iexplore/models/event.dart';
+import 'package:iexplore/models/objectBoxModel/account.dart';
+import 'package:iexplore/models/objectBoxModel/event.dart';
 import 'package:iexplore/objectbox.g.dart';
 import 'package:iexplore/splashScreen/splash_screen.dart';
 
@@ -55,9 +55,9 @@ class MyApp extends StatelessWidget {
     );
   }
 
-  // @override
-  // void dispose(){
-  //   super.dispose();
-  //   objectbox.store.close();
-  // }
+// @override
+// void dispose(){
+//   super.dispose();
+//   objectbox.store.close();
+// }
 }

@@ -9,8 +9,7 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:iexplore/homeScreen/home_screen.dart';
 import 'package:iexplore/main.dart';
-
-import 'package:iexplore/models/account.dart';
+import 'package:iexplore/models/objectBoxModel/account.dart';
 import 'package:iexplore/objectbox.g.dart';
 import 'package:iexplore/widgets/custom/custom_text_field.dart';
 import 'package:iexplore/widgets/error_dialog.dart';

@@ -13,7 +13,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  var appBarTitleText = const Text("Welcome new user", style: TextStyle(fontSize: 20, fontFamily: "Lobster"),);
+  var appBarTitleText = const Text(
+    "Welcome new user",
+    style: TextStyle(fontSize: 20, fontFamily: "Lobster"),
+  );
 
   Future<void> readCurrentUserInLocal() async {
     await FirebaseFirestore.instance
@@ -29,7 +32,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
         query.close();
         setState(() {
-          appBarTitleText = Text("Welcome " + currentAccount!.name, style: const TextStyle(fontSize: 20, fontFamily: "Lobster"));
+          appBarTitleText = Text("Welcome " + currentAccount!.name,
+              style: const TextStyle(fontSize: 20, fontFamily: "Lobster"));
         });
       }
     });
@@ -63,13 +67,18 @@ class _HomeScreenState extends State<HomeScreen> {
         centerTitle: true,
         automaticallyImplyLeading: true,
         actions: [
-          IconButton(icon: const Icon(Icons.post_add), onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (c) => const UploadReportAboutEventScreen()));
-          })
+          IconButton(
+              icon: const Icon(Icons.post_add),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (c) => const UploadReportAboutEventScreen()));
+              })
         ],
       ),
       drawer: const HomeDrawer(),
-      body: Center(),
+      body: const Center(),
     );
   }
 }

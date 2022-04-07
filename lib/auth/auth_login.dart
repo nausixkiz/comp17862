@@ -17,11 +17,10 @@ class _AuthLoginState extends State<AuthLogin> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  Future<void> formValidation() async{
-    if(emailController.text.isNotEmpty && passwordController.text.isNotEmpty){
+  Future<void> formValidation() async {
+    if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
       authLogin();
-    }
-    else{
+    } else {
       showDialog<void>(
         context: context,
         barrierDismissible: true,
@@ -33,7 +32,7 @@ class _AuthLoginState extends State<AuthLogin> {
     }
   }
 
-  Future<void> authLogin() async{
+  Future<void> authLogin() async {
     showDialog<void>(
       context: context,
       barrierDismissible: true,
@@ -43,23 +42,25 @@ class _AuthLoginState extends State<AuthLogin> {
       },
     );
 
-    await firebaseAuth.signInWithEmailAndPassword(email: emailController.text.trim(), password: passwordController.text.trim())
+    await firebaseAuth
+        .signInWithEmailAndPassword(
+            email: emailController.text.trim(),
+            password: passwordController.text.trim())
         .then((value) {
-          Navigator.pop(context);
-              Navigator.push(
-              context, MaterialPageRoute(builder: (c) => const HomeScreen()));
-          })
-        .catchError((error) {
-            Navigator.pop(context);
-            showDialog<void>(
-              context: context,
-              barrierDismissible: true,
-              // false = user must tap button, true = tap outside dialog
-              builder: (BuildContext dialogContext) {
-                return ErrorDialog(message: error.message.toString());
-              },
-            );
-        });
+      Navigator.pop(context);
+      Navigator.push(
+          context, MaterialPageRoute(builder: (c) => const HomeScreen()));
+    }).catchError((error) {
+      Navigator.pop(context);
+      showDialog<void>(
+        context: context,
+        barrierDismissible: true,
+        // false = user must tap button, true = tap outside dialog
+        builder: (BuildContext dialogContext) {
+          return ErrorDialog(message: error.message.toString());
+        },
+      );
+    });
   }
 
   @override
@@ -68,24 +69,26 @@ class _AuthLoginState extends State<AuthLogin> {
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
-          Form(key: _formKey, child: Column(
-            children: [
-              CustomTextField(
-                  iconData: Icons.email,
-                  controller: emailController,
-                  text: "Email",
-                  isObscure: false,
-                  isEnabled: true),
-              CustomTextField(
-                  iconData: Icons.lock,
-                  controller: passwordController,
-                  text: "Password",
-                  isObscure: true,
-                  isEnabled: true),
-            ],
-          )),
+          Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  CustomTextField(
+                      iconData: Icons.email,
+                      controller: emailController,
+                      text: "Email",
+                      isObscure: false,
+                      isEnabled: true),
+                  CustomTextField(
+                      iconData: Icons.lock,
+                      controller: passwordController,
+                      text: "Password",
+                      isObscure: true,
+                      isEnabled: true),
+                ],
+              )),
           ElevatedButton(
-              onPressed:  () {
+              onPressed: () {
                 formValidation();
               },
               child: const Text("Login",

@@ -5,7 +5,6 @@ import 'package:iexplore/auth/auth_screen.dart';
 import 'package:iexplore/homeScreen/home_screen.dart';
 import 'package:iexplore/main.dart';
 
-
 class MasterSplashScreen extends StatefulWidget {
   const MasterSplashScreen({Key? key}) : super(key: key);
 
@@ -17,11 +16,10 @@ class _MasterSplashScreenState extends State<MasterSplashScreen> {
   startTimer() {
     //Bug
     Timer(const Duration(seconds: 1), () async {
-      if(firebaseAuth.currentUser == null) {
+      if (firebaseAuth.currentUser == null) {
         Navigator.push(
             context, MaterialPageRoute(builder: (c) => const AuthScreen()));
-      }
-      else{
+      } else {
         Navigator.push(
             context, MaterialPageRoute(builder: (c) => const HomeScreen()));
       }
