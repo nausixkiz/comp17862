@@ -34,8 +34,8 @@ class _UploadReportAboutEventScreen extends State<UploadReportAboutEventScreen> 
     final _timeOfAttending = timeOfAttendingController.text.isNotEmpty ? timeOfAttendingController.text.trim() : " ";
     final _nameOfReporter= nameOfReporterController.text.trim();
 
-    print(_uuid);
     final ref = FirebaseFirestore.instance.collection("i-explore").doc(currentAccount!.firebaseUuid).collection("events").doc(_uuid).set({
+      "firebaseUuid": _uuid,
       "activityName": _activityName,
       "location": _location,
       "dateHeld": _dateHeld,
