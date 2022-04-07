@@ -1,0 +1,25 @@
+import 'package:objectbox/objectbox.dart';
+
+@Entity()
+@Sync()
+class Account {
+  // Annotate with @Id() if name isn't "id" (case insensitive).
+  int id = 0;
+  String name;
+  @Unique(onConflict: ConflictStrategy.replace)
+  String email;
+  String password;
+  String phone;
+  String address;
+  String avatarUrl;
+
+  Account({
+    // required this.id,
+    required this.name,
+    required this.email,
+    required this.password,
+    required this.phone,
+    required this.address,
+    required this.avatarUrl,
+  });
+}

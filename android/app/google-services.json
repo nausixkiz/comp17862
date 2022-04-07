@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "983752847339",
+    "project_id": "iexplore-07042022",
+    "storage_bucket": "iexplore-07042022.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:983752847339:android:806e3b81b5e25eb9cdb3ae",
+        "android_client_info": {
+          "package_name": "com.ryosoft.iexplore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "983752847339-pcbgcbgour0rjp5frrkjrj40e12t05bk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnMdmRP2ojoftS_H7i0q8LHBQGFVG_xKc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "983752847339-pcbgcbgour0rjp5frrkjrj40e12t05bk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
