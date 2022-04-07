@@ -40,6 +40,9 @@ dependencies:
   objectbox: ^1.4.1
   objectbox_sync_flutter_libs: any
   crypt: ^4.2.1
+  flutter_datetime_picker: ^1.5.1
+  jiffy: ^5.0.0
+  uuid: 3.0.6
   #Firebase
   firebase_core: ^1.14.0
   firebase_auth: ^3.3.12

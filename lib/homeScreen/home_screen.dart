@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:iexplore/main.dart';
 import 'package:iexplore/objectbox.g.dart';
-
-import '../widgets/home_drawer.dart';
+import 'package:iexplore/screen/upload/upload_report_about_event_screen.dart';
+import 'package:iexplore/widgets/home_drawer.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -13,7 +13,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  var appBarTitleText = const Text("Welcome new user");
+  var appBarTitleText = const Text("Welcome new user", style: TextStyle(fontSize: 20, fontFamily: "Lobster"),);
 
   Future<void> readCurrentUserInLocal() async {
     await FirebaseFirestore.instance
@@ -29,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
         query.close();
         setState(() {
-          appBarTitleText = Text("Welcome " + currentAccount!.name);
+          appBarTitleText = Text("Welcome " + currentAccount!.name, style: const TextStyle(fontSize: 20, fontFamily: "Lobster"));
         });
       }
     });
@@ -61,9 +61,15 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         title: appBarTitleText,
         centerTitle: true,
-        // automaticallyImplyLeading: false,
+        automaticallyImplyLeading: true,
+        actions: [
+          IconButton(icon: const Icon(Icons.post_add), onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (c) => const UploadReportAboutEventScreen()));
+          })
+        ],
       ),
       drawer: const HomeDrawer(),
+      body: Center(),
     );
   }
 }

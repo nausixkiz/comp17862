@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:iexplore/homeScreen/home_screen.dart';
 import 'package:iexplore/main.dart';
+import 'package:iexplore/widgets/custom/custom_text_field.dart';
 import 'package:iexplore/widgets/error_dialog.dart';
 import 'package:iexplore/widgets/loading.dart';
-
-import '../widgets/custom_text_field.dart';
 
 class AuthLogin extends StatefulWidget {
   const AuthLogin({Key? key}) : super(key: key);
@@ -93,7 +92,7 @@ class _AuthLoginState extends State<AuthLogin> {
                   style: TextStyle(
                       color: Colors.white, fontWeight: FontWeight.bold)),
               style: ElevatedButton.styleFrom(
-                  primary: Colors.purple,
+                  primary: Colors.red,
                   padding: const EdgeInsets.symmetric(
                       horizontal: 80, vertical: 10))),
         ],

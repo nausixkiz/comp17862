@@ -5,6 +5,7 @@ import 'package:objectbox/objectbox.dart';
 class Account {
   // Annotate with @Id() if name isn't "id" (case insensitive).
   int id = 0;
+  String firebaseUuid;
   String name;
   @Unique(onConflict: ConflictStrategy.replace)
   String email;
@@ -14,7 +15,7 @@ class Account {
   String avatarUrl;
 
   Account({
-    // required this.id,
+    required this.firebaseUuid,
     required this.name,
     required this.email,
     required this.password,

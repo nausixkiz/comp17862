@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
-class CustomTextField extends StatelessWidget {
-  final TextEditingController? controller;
+class CustomAutoFillTextField extends StatelessWidget {
+  final TextEditingController controller;
   final IconData? iconData;
-  final String? text;
-  final bool isObscure;
-  final bool isEnabled;
+  final String text;
+  final String textFill;
+  final bool isObscure = false;
+  final bool isEnabled = true;
 
-  CustomTextField({
-    this.controller,
+  CustomAutoFillTextField({
+    required this.controller,
     this.iconData,
-    this.text,
-    required this.isObscure,
-    required this.isEnabled,
+    required this.text,
+    required this.textFill,
   });
 
   @override
@@ -29,6 +29,11 @@ class CustomTextField extends StatelessWidget {
         controller: controller,
         obscureText: isObscure,
         cursorColor: Theme.of(context).primaryColor,
+        onTap: () {
+          if (controller.text.isEmpty) {
+            controller.text = textFill;
+          }
+        },
         decoration: InputDecoration(
             enabledBorder: const OutlineInputBorder(
               // width: 0.0 produces a thin "hairline" border
@@ -41,8 +46,7 @@ class CustomTextField extends StatelessWidget {
               color: Colors.red,
             ),
             focusColor: Theme.of(context).primaryColor,
-            hintText: text
-        ),
+            hintText: text),
       ),
     );
   }

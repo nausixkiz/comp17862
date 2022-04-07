@@ -7,16 +7,15 @@ import 'package:firebase_storage/firebase_storage.dart' as f_storage;
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:iexplore/homeScreen/home_screen.dart';
 import 'package:iexplore/main.dart';
 
 import 'package:iexplore/models/account.dart';
 import 'package:iexplore/objectbox.g.dart';
-import 'package:iexplore/widgets/custom_text_field.dart';
+import 'package:iexplore/widgets/custom/custom_text_field.dart';
+import 'package:iexplore/widgets/error_dialog.dart';
+import 'package:iexplore/widgets/loading.dart';
 import 'package:image_picker/image_picker.dart';
-
-import '../homeScreen/home_screen.dart';
-import '../widgets/error_dialog.dart';
-import '../widgets/loading.dart';
 
 class AuthRegister extends StatefulWidget {
   const AuthRegister({Key? key}) : super(key: key);
@@ -159,23 +158,24 @@ class _AuthRegisterState extends State<AuthRegister> {
       );
     });
     if (user != null) {
-      saveDataToFirebase(user!).then((value) {
-        Navigator.pop(context);
-        Route route = MaterialPageRoute(builder: (c) => const HomeScreen());
-        Navigator.pushReplacement(context, route);
-      });
       saveDataUserToObjectBox(
+        user!.uid,
         nameController.text,
         emailController.text,
         passwordController.text,
         phoneController.text,
         addressController.text,
       );
+      saveDataToFirebase(user!).then((value) {
+        Navigator.pop(context);
+        Route route = MaterialPageRoute(builder: (c) => const HomeScreen());
+        Navigator.pushReplacement(context, route);
+      });
     }
   }
 
   /// Save User Data
-  Future<void> saveDataUserToObjectBox(String _name, String _email,
+  Future<void> saveDataUserToObjectBox(String _uid, String _name, String _email,
       String _password, String _phone, String _address) async {
     final query = accountObjectBox.query(Account_.email.equals(_email)).build();
     final userResults = query.find();
@@ -184,6 +184,7 @@ class _AuthRegisterState extends State<AuthRegister> {
     if (userResults.isEmpty) {
       try {
         await accountObjectBox.putAsync(Account(
+            firebaseUuid: _uid,
             name: _name.trim(),
             email: _email.trim(),
             password: Crypt.sha512(_password.trim()).toString(),
@@ -334,7 +335,7 @@ class _AuthRegisterState extends State<AuthRegister> {
                   style: TextStyle(
                       color: Colors.white, fontWeight: FontWeight.bold)),
               style: ElevatedButton.styleFrom(
-                  primary: Colors.purple,
+                  primary: Colors.red,
                   padding: const EdgeInsets.symmetric(
                       horizontal: 80, vertical: 10))),
           const SizedBox(

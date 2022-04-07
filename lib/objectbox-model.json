@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "1:1712885548659213481",
-      "lastPropertyId": "7:4277992262783764311",
+      "lastPropertyId": "9:5944211553272414947",
       "name": "Account",
       "flags": 2,
       "properties": [
@@ -46,12 +46,62 @@
           "id": "7:4277992262783764311",
           "name": "avatarUrl",
           "type": 9
+        },
+        {
+          "id": "9:5944211553272414947",
+          "name": "firebaseUuid",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:4286727007805480962",
+      "lastPropertyId": "9:7292600360333371458",
+      "name": "Event",
+      "flags": 2,
+      "properties": [
+        {
+          "id": "1:2732258002863280504",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:5475737996574946140",
+          "name": "activityName",
+          "type": 9
+        },
+        {
+          "id": "3:147663942465862169",
+          "name": "location",
+          "type": 9
+        },
+        {
+          "id": "5:1469399236199722966",
+          "name": "nameOfReporter",
+          "type": 9
+        },
+        {
+          "id": "6:2059717041332119832",
+          "name": "timeOfAttending",
+          "type": 9
+        },
+        {
+          "id": "7:8893305035485617619",
+          "name": "dateHeld",
+          "type": 9
+        },
+        {
+          "id": "9:7292600360333371458",
+          "name": "firebaseUuid",
+          "type": 9
         }
       ],
       "relations": []
     }
   ],
-  "lastEntityId": "1:1712885548659213481",
+  "lastEntityId": "2:4286727007805480962",
   "lastIndexId": "1:9000978840175663253",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
@@ -59,7 +109,11 @@
   "modelVersionParserMinimum": 5,
   "retiredEntityUids": [],
   "retiredIndexUids": [],
-  "retiredPropertyUids": [],
+  "retiredPropertyUids": [
+    2021490705418139639,
+    9216695209692139162,
+    3960270686729404293
+  ],
   "retiredRelationUids": [],
   "version": 1
 }

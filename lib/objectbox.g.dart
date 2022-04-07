@@ -14,6 +14,7 @@ import 'package:objectbox/objectbox.dart';
 import 'package:objectbox_sync_flutter_libs/objectbox_sync_flutter_libs.dart';
 
 import 'models/account.dart';
+import 'models/event.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
 
@@ -21,7 +22,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(1, 1712885548659213481),
       name: 'Account',
-      lastPropertyId: const IdUid(7, 4277992262783764311),
+      lastPropertyId: const IdUid(9, 5944211553272414947),
       flags: 2,
       properties: <ModelProperty>[
         ModelProperty(
@@ -59,6 +60,55 @@ final _entities = <ModelEntity>[
             id: const IdUid(7, 4277992262783764311),
             name: 'avatarUrl',
             type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(9, 5944211553272414947),
+            name: 'firebaseUuid',
+            type: 9,
+            flags: 0)
+      ],
+      relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(2, 4286727007805480962),
+      name: 'Event',
+      lastPropertyId: const IdUid(9, 7292600360333371458),
+      flags: 2,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 2732258002863280504),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 5475737996574946140),
+            name: 'activityName',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(3, 147663942465862169),
+            name: 'location',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(5, 1469399236199722966),
+            name: 'nameOfReporter',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(6, 2059717041332119832),
+            name: 'timeOfAttending',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(7, 8893305035485617619),
+            name: 'dateHeld',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(9, 7292600360333371458),
+            name: 'firebaseUuid',
+            type: 9,
             flags: 0)
       ],
       relations: <ModelRelation>[],
@@ -85,13 +135,17 @@ Future<Store> openStore(
 ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
-      lastEntityId: const IdUid(1, 1712885548659213481),
+      lastEntityId: const IdUid(2, 4286727007805480962),
       lastIndexId: const IdUid(1, 9000978840175663253),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),
       retiredEntityUids: const [],
       retiredIndexUids: const [],
-      retiredPropertyUids: const [],
+      retiredPropertyUids: const [
+        2021490705418139639,
+        9216695209692139162,
+        3960270686729404293
+      ],
       retiredRelationUids: const [],
       modelVersion: 5,
       modelVersionParserMinimum: 5,
@@ -113,7 +167,8 @@ ModelDefinition getObjectBoxModel() {
           final phoneOffset = fbb.writeString(object.phone);
           final addressOffset = fbb.writeString(object.address);
           final avatarUrlOffset = fbb.writeString(object.avatarUrl);
-          fbb.startTable(8);
+          final firebaseUuidOffset = fbb.writeString(object.firebaseUuid);
+          fbb.startTable(10);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, nameOffset);
           fbb.addOffset(2, emailOffset);
@@ -121,6 +176,7 @@ ModelDefinition getObjectBoxModel() {
           fbb.addOffset(4, phoneOffset);
           fbb.addOffset(5, addressOffset);
           fbb.addOffset(6, avatarUrlOffset);
+          fbb.addOffset(8, firebaseUuidOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -129,6 +185,8 @@ ModelDefinition getObjectBoxModel() {
           final rootOffset = buffer.derefObject(0);
 
           final object = Account(
+              firebaseUuid: const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 20, ''),
               name: const fb.StringReader(asciiOptimization: true)
                   .vTableGet(buffer, rootOffset, 6, ''),
               email: const fb.StringReader(asciiOptimization: true)
@@ -141,6 +199,57 @@ ModelDefinition getObjectBoxModel() {
                   .vTableGet(buffer, rootOffset, 14, ''),
               avatarUrl: const fb.StringReader(asciiOptimization: true)
                   .vTableGet(buffer, rootOffset, 16, ''))
+            ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+
+          return object;
+        }),
+    Event: EntityDefinition<Event>(
+        model: _entities[1],
+        toOneRelations: (Event object) => [],
+        toManyRelations: (Event object) => {},
+        getId: (Event object) => object.id,
+        setId: (Event object, int id) {
+          object.id = id;
+        },
+        objectToFB: (Event object, fb.Builder fbb) {
+          final activityNameOffset = fbb.writeString(object.activityName);
+          final locationOffset = object.location == null
+              ? null
+              : fbb.writeString(object.location!);
+          final nameOfReporterOffset = fbb.writeString(object.nameOfReporter);
+          final timeOfAttendingOffset = object.timeOfAttending == null
+              ? null
+              : fbb.writeString(object.timeOfAttending!);
+          final dateHeldOffset = fbb.writeString(object.dateHeld);
+          final firebaseUuidOffset = fbb.writeString(object.firebaseUuid);
+          fbb.startTable(10);
+          fbb.addInt64(0, object.id);
+          fbb.addOffset(1, activityNameOffset);
+          fbb.addOffset(2, locationOffset);
+          fbb.addOffset(4, nameOfReporterOffset);
+          fbb.addOffset(5, timeOfAttendingOffset);
+          fbb.addOffset(6, dateHeldOffset);
+          fbb.addOffset(8, firebaseUuidOffset);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+
+          final object = Event(
+              firebaseUuid: const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 20, ''),
+              activityName: const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 6, ''),
+              location: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 8),
+              dateHeld: const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 16, ''),
+              timeOfAttending: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 14),
+              nameOfReporter: const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 12, ''))
             ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
 
           return object;
@@ -175,4 +284,38 @@ class Account_ {
   /// see [Account.avatarUrl]
   static final avatarUrl =
       QueryStringProperty<Account>(_entities[0].properties[6]);
+
+  /// see [Account.firebaseUuid]
+  static final firebaseUuid =
+      QueryStringProperty<Account>(_entities[0].properties[7]);
+}
+
+/// [Event] entity fields to define ObjectBox queries.
+class Event_ {
+  /// see [Event.id]
+  static final id = QueryIntegerProperty<Event>(_entities[1].properties[0]);
+
+  /// see [Event.activityName]
+  static final activityName =
+      QueryStringProperty<Event>(_entities[1].properties[1]);
+
+  /// see [Event.location]
+  static final location =
+      QueryStringProperty<Event>(_entities[1].properties[2]);
+
+  /// see [Event.nameOfReporter]
+  static final nameOfReporter =
+      QueryStringProperty<Event>(_entities[1].properties[3]);
+
+  /// see [Event.timeOfAttending]
+  static final timeOfAttending =
+      QueryStringProperty<Event>(_entities[1].properties[4]);
+
+  /// see [Event.dateHeld]
+  static final dateHeld =
+      QueryStringProperty<Event>(_entities[1].properties[5]);
+
+  /// see [Event.firebaseUuid]
+  static final firebaseUuid =
+      QueryStringProperty<Event>(_entities[1].properties[6]);
 }

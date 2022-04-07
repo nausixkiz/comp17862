@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:iexplore/extensions/object_box.dart';
 import 'package:iexplore/models/account.dart';
+import 'package:iexplore/models/event.dart';
 import 'package:iexplore/objectbox.g.dart';
 import 'package:iexplore/splashScreen/splash_screen.dart';
 
@@ -12,6 +13,7 @@ import 'package:iexplore/splashScreen/splash_screen.dart';
 final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 late ObjectBox objectbox;
 Box<Account> accountObjectBox = objectbox.store.box<Account>();
+Box<Event> eventObjectBox = objectbox.store.box<Event>();
 late Account? currentAccount;
 
 Uint8List secret =
