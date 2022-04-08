@@ -1,6 +1,4 @@
-
-
-class Event {
+class EventFirebaseModel {
   String? firebaseUuid;
   String? activityName;
   String? location;
@@ -8,7 +6,7 @@ class Event {
   String? timeOfAttending;
   String? nameOfReporter;
 
-  Event({
+  EventFirebaseModel({
     this.firebaseUuid,
     this.activityName,
     this.location,
@@ -17,7 +15,7 @@ class Event {
     this.nameOfReporter,
   });
 
-  Event.fromJson(Map<String, dynamic> json) {
+  EventFirebaseModel.fromJson(Map<String, dynamic> json) {
     firebaseUuid = json["firebaseUuid"];
     activityName = json["activityName"];
     location = json["location"];

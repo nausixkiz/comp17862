@@ -13,101 +13,101 @@ import 'package:objectbox/internal.dart'; // generated code can access "internal
 import 'package:objectbox/objectbox.dart';
 import 'package:objectbox_sync_flutter_libs/objectbox_sync_flutter_libs.dart';
 
-import 'models/objectBoxModel/account.dart';
-import 'models/event.dart';
+import 'models/objectBoxModel/account_object_box_model.dart';
+import 'models/objectBoxModel/event_object_box_model.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
 
 final _entities = <ModelEntity>[
   ModelEntity(
-      id: const IdUid(1, 1712885548659213481),
-      name: 'Account',
-      lastPropertyId: const IdUid(9, 5944211553272414947),
+      id: const IdUid(1, 894584066545555716),
+      name: 'AccountObjectBoxModel',
+      lastPropertyId: const IdUid(8, 2399310828962242081),
       flags: 2,
       properties: <ModelProperty>[
         ModelProperty(
-            id: const IdUid(1, 5996641448177981287),
+            id: const IdUid(1, 6597798685354896383),
             name: 'id',
             type: 6,
             flags: 1),
         ModelProperty(
-            id: const IdUid(2, 4715176537879985151),
+            id: const IdUid(2, 6582088899059863461),
+            name: 'firebaseUuid',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(3, 1663060796973832565),
             name: 'name',
             type: 9,
             flags: 0),
         ModelProperty(
-            id: const IdUid(3, 7991796932316584492),
+            id: const IdUid(4, 2695866292888030058),
             name: 'email',
             type: 9,
             flags: 34848,
-            indexId: const IdUid(1, 9000978840175663253)),
+            indexId: const IdUid(1, 252866033431091166)),
         ModelProperty(
-            id: const IdUid(4, 5221348918566422859),
+            id: const IdUid(5, 8555954328618909407),
             name: 'password',
             type: 9,
             flags: 0),
         ModelProperty(
-            id: const IdUid(5, 8676105781591898063),
+            id: const IdUid(6, 4716070175848106164),
             name: 'phone',
             type: 9,
             flags: 0),
         ModelProperty(
-            id: const IdUid(6, 7401069183167295865),
+            id: const IdUid(7, 2984473658201382102),
             name: 'address',
             type: 9,
             flags: 0),
         ModelProperty(
-            id: const IdUid(7, 4277992262783764311),
+            id: const IdUid(8, 2399310828962242081),
             name: 'avatarUrl',
-            type: 9,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(9, 5944211553272414947),
-            name: 'firebaseUuid',
             type: 9,
             flags: 0)
       ],
       relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[]),
   ModelEntity(
-      id: const IdUid(2, 4286727007805480962),
-      name: 'Event',
-      lastPropertyId: const IdUid(9, 7292600360333371458),
+      id: const IdUid(2, 5284398797134205399),
+      name: 'EventObjectBoxModel',
+      lastPropertyId: const IdUid(7, 353454845742527714),
       flags: 2,
       properties: <ModelProperty>[
         ModelProperty(
-            id: const IdUid(1, 2732258002863280504),
+            id: const IdUid(1, 1936299571483457156),
             name: 'id',
             type: 6,
             flags: 1),
         ModelProperty(
-            id: const IdUid(2, 5475737996574946140),
+            id: const IdUid(2, 3216595188538739249),
+            name: 'firebaseUuid',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(3, 4946678063010437102),
             name: 'activityName',
             type: 9,
             flags: 0),
         ModelProperty(
-            id: const IdUid(3, 147663942465862169),
+            id: const IdUid(4, 3238622959118337526),
             name: 'location',
             type: 9,
             flags: 0),
         ModelProperty(
-            id: const IdUid(5, 1469399236199722966),
-            name: 'nameOfReporter',
-            type: 9,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(6, 2059717041332119832),
-            name: 'timeOfAttending',
-            type: 9,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(7, 8893305035485617619),
+            id: const IdUid(5, 2060668512536966492),
             name: 'dateHeld',
             type: 9,
             flags: 0),
         ModelProperty(
-            id: const IdUid(9, 7292600360333371458),
-            name: 'firebaseUuid',
+            id: const IdUid(6, 482198134027640257),
+            name: 'timeOfAttending',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(7, 353454845742527714),
+            name: 'nameOfReporter',
             type: 9,
             flags: 0)
       ],
@@ -135,48 +135,44 @@ Future<Store> openStore(
 ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
-      lastEntityId: const IdUid(2, 4286727007805480962),
-      lastIndexId: const IdUid(1, 9000978840175663253),
+      lastEntityId: const IdUid(2, 5284398797134205399),
+      lastIndexId: const IdUid(1, 252866033431091166),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),
       retiredEntityUids: const [],
       retiredIndexUids: const [],
-      retiredPropertyUids: const [
-        2021490705418139639,
-        9216695209692139162,
-        3960270686729404293
-      ],
+      retiredPropertyUids: const [],
       retiredRelationUids: const [],
       modelVersion: 5,
       modelVersionParserMinimum: 5,
       version: 1);
 
   final bindings = <Type, EntityDefinition>{
-    Account: EntityDefinition<Account>(
+    AccountObjectBoxModel: EntityDefinition<AccountObjectBoxModel>(
         model: _entities[0],
-        toOneRelations: (Account object) => [],
-        toManyRelations: (Account object) => {},
-        getId: (Account object) => object.id,
-        setId: (Account object, int id) {
+        toOneRelations: (AccountObjectBoxModel object) => [],
+        toManyRelations: (AccountObjectBoxModel object) => {},
+        getId: (AccountObjectBoxModel object) => object.id,
+        setId: (AccountObjectBoxModel object, int id) {
           object.id = id;
         },
-        objectToFB: (Account object, fb.Builder fbb) {
+        objectToFB: (AccountObjectBoxModel object, fb.Builder fbb) {
+          final firebaseUuidOffset = fbb.writeString(object.firebaseUuid);
           final nameOffset = fbb.writeString(object.name);
           final emailOffset = fbb.writeString(object.email);
           final passwordOffset = fbb.writeString(object.password);
           final phoneOffset = fbb.writeString(object.phone);
           final addressOffset = fbb.writeString(object.address);
           final avatarUrlOffset = fbb.writeString(object.avatarUrl);
-          final firebaseUuidOffset = fbb.writeString(object.firebaseUuid);
-          fbb.startTable(10);
+          fbb.startTable(9);
           fbb.addInt64(0, object.id);
-          fbb.addOffset(1, nameOffset);
-          fbb.addOffset(2, emailOffset);
-          fbb.addOffset(3, passwordOffset);
-          fbb.addOffset(4, phoneOffset);
-          fbb.addOffset(5, addressOffset);
-          fbb.addOffset(6, avatarUrlOffset);
-          fbb.addOffset(8, firebaseUuidOffset);
+          fbb.addOffset(1, firebaseUuidOffset);
+          fbb.addOffset(2, nameOffset);
+          fbb.addOffset(3, emailOffset);
+          fbb.addOffset(4, passwordOffset);
+          fbb.addOffset(5, phoneOffset);
+          fbb.addOffset(6, addressOffset);
+          fbb.addOffset(7, avatarUrlOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -184,52 +180,52 @@ ModelDefinition getObjectBoxModel() {
           final buffer = fb.BufferContext(fbData);
           final rootOffset = buffer.derefObject(0);
 
-          final object = Account(
+          final object = AccountObjectBoxModel(
               firebaseUuid: const fb.StringReader(asciiOptimization: true)
-                  .vTableGet(buffer, rootOffset, 20, ''),
-              name: const fb.StringReader(asciiOptimization: true)
                   .vTableGet(buffer, rootOffset, 6, ''),
-              email: const fb.StringReader(asciiOptimization: true)
+              name: const fb.StringReader(asciiOptimization: true)
                   .vTableGet(buffer, rootOffset, 8, ''),
-              password: const fb.StringReader(asciiOptimization: true)
+              email: const fb.StringReader(asciiOptimization: true)
                   .vTableGet(buffer, rootOffset, 10, ''),
-              phone: const fb.StringReader(asciiOptimization: true)
+              password: const fb.StringReader(asciiOptimization: true)
                   .vTableGet(buffer, rootOffset, 12, ''),
-              address: const fb.StringReader(asciiOptimization: true)
+              phone: const fb.StringReader(asciiOptimization: true)
                   .vTableGet(buffer, rootOffset, 14, ''),
+              address: const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 16, ''),
               avatarUrl: const fb.StringReader(asciiOptimization: true)
-                  .vTableGet(buffer, rootOffset, 16, ''))
+                  .vTableGet(buffer, rootOffset, 18, ''))
             ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
 
           return object;
         }),
-    Event: EntityDefinition<Event>(
+    EventObjectBoxModel: EntityDefinition<EventObjectBoxModel>(
         model: _entities[1],
-        toOneRelations: (Event object) => [],
-        toManyRelations: (Event object) => {},
-        getId: (Event object) => object.id,
-        setId: (Event object, int id) {
+        toOneRelations: (EventObjectBoxModel object) => [],
+        toManyRelations: (EventObjectBoxModel object) => {},
+        getId: (EventObjectBoxModel object) => object.id,
+        setId: (EventObjectBoxModel object, int id) {
           object.id = id;
         },
-        objectToFB: (Event object, fb.Builder fbb) {
+        objectToFB: (EventObjectBoxModel object, fb.Builder fbb) {
+          final firebaseUuidOffset = fbb.writeString(object.firebaseUuid);
           final activityNameOffset = fbb.writeString(object.activityName);
           final locationOffset = object.location == null
               ? null
               : fbb.writeString(object.location!);
-          final nameOfReporterOffset = fbb.writeString(object.nameOfReporter);
+          final dateHeldOffset = fbb.writeString(object.dateHeld);
           final timeOfAttendingOffset = object.timeOfAttending == null
               ? null
               : fbb.writeString(object.timeOfAttending!);
-          final dateHeldOffset = fbb.writeString(object.dateHeld);
-          final firebaseUuidOffset = fbb.writeString(object.firebaseUuid);
-          fbb.startTable(10);
+          final nameOfReporterOffset = fbb.writeString(object.nameOfReporter);
+          fbb.startTable(8);
           fbb.addInt64(0, object.id);
-          fbb.addOffset(1, activityNameOffset);
-          fbb.addOffset(2, locationOffset);
-          fbb.addOffset(4, nameOfReporterOffset);
+          fbb.addOffset(1, firebaseUuidOffset);
+          fbb.addOffset(2, activityNameOffset);
+          fbb.addOffset(3, locationOffset);
+          fbb.addOffset(4, dateHeldOffset);
           fbb.addOffset(5, timeOfAttendingOffset);
-          fbb.addOffset(6, dateHeldOffset);
-          fbb.addOffset(8, firebaseUuidOffset);
+          fbb.addOffset(6, nameOfReporterOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -237,19 +233,19 @@ ModelDefinition getObjectBoxModel() {
           final buffer = fb.BufferContext(fbData);
           final rootOffset = buffer.derefObject(0);
 
-          final object = Event(
+          final object = EventObjectBoxModel(
               firebaseUuid: const fb.StringReader(asciiOptimization: true)
-                  .vTableGet(buffer, rootOffset, 20, ''),
-              activityName: const fb.StringReader(asciiOptimization: true)
                   .vTableGet(buffer, rootOffset, 6, ''),
+              activityName: const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 8, ''),
               location: const fb.StringReader(asciiOptimization: true)
-                  .vTableGetNullable(buffer, rootOffset, 8),
+                  .vTableGetNullable(buffer, rootOffset, 10),
               dateHeld: const fb.StringReader(asciiOptimization: true)
-                  .vTableGet(buffer, rootOffset, 16, ''),
+                  .vTableGet(buffer, rootOffset, 12, ''),
               timeOfAttending: const fb.StringReader(asciiOptimization: true)
                   .vTableGetNullable(buffer, rootOffset, 14),
               nameOfReporter: const fb.StringReader(asciiOptimization: true)
-                  .vTableGet(buffer, rootOffset, 12, ''))
+                  .vTableGet(buffer, rootOffset, 16, ''))
             ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
 
           return object;
@@ -259,63 +255,68 @@ ModelDefinition getObjectBoxModel() {
   return ModelDefinition(model, bindings);
 }
 
-/// [Account] entity fields to define ObjectBox queries.
-class Account_ {
-  /// see [Account.id]
-  static final id = QueryIntegerProperty<Account>(_entities[0].properties[0]);
+/// [AccountObjectBoxModel] entity fields to define ObjectBox queries.
+class AccountObjectBoxModel_ {
+  /// see [AccountObjectBoxModel.id]
+  static final id =
+      QueryIntegerProperty<AccountObjectBoxModel>(_entities[0].properties[0]);
 
-  /// see [Account.name]
-  static final name = QueryStringProperty<Account>(_entities[0].properties[1]);
-
-  /// see [Account.email]
-  static final email = QueryStringProperty<Account>(_entities[0].properties[2]);
-
-  /// see [Account.password]
-  static final password =
-      QueryStringProperty<Account>(_entities[0].properties[3]);
-
-  /// see [Account.phone]
-  static final phone = QueryStringProperty<Account>(_entities[0].properties[4]);
-
-  /// see [Account.address]
-  static final address =
-      QueryStringProperty<Account>(_entities[0].properties[5]);
-
-  /// see [Account.avatarUrl]
-  static final avatarUrl =
-      QueryStringProperty<Account>(_entities[0].properties[6]);
-
-  /// see [Account.firebaseUuid]
+  /// see [AccountObjectBoxModel.firebaseUuid]
   static final firebaseUuid =
-      QueryStringProperty<Account>(_entities[0].properties[7]);
+      QueryStringProperty<AccountObjectBoxModel>(_entities[0].properties[1]);
+
+  /// see [AccountObjectBoxModel.name]
+  static final name =
+      QueryStringProperty<AccountObjectBoxModel>(_entities[0].properties[2]);
+
+  /// see [AccountObjectBoxModel.email]
+  static final email =
+      QueryStringProperty<AccountObjectBoxModel>(_entities[0].properties[3]);
+
+  /// see [AccountObjectBoxModel.password]
+  static final password =
+      QueryStringProperty<AccountObjectBoxModel>(_entities[0].properties[4]);
+
+  /// see [AccountObjectBoxModel.phone]
+  static final phone =
+      QueryStringProperty<AccountObjectBoxModel>(_entities[0].properties[5]);
+
+  /// see [AccountObjectBoxModel.address]
+  static final address =
+      QueryStringProperty<AccountObjectBoxModel>(_entities[0].properties[6]);
+
+  /// see [AccountObjectBoxModel.avatarUrl]
+  static final avatarUrl =
+      QueryStringProperty<AccountObjectBoxModel>(_entities[0].properties[7]);
 }
 
-/// [Event] entity fields to define ObjectBox queries.
-class Event_ {
-  /// see [Event.id]
-  static final id = QueryIntegerProperty<Event>(_entities[1].properties[0]);
+/// [EventObjectBoxModel] entity fields to define ObjectBox queries.
+class EventObjectBoxModel_ {
+  /// see [EventObjectBoxModel.id]
+  static final id =
+      QueryIntegerProperty<EventObjectBoxModel>(_entities[1].properties[0]);
 
-  /// see [Event.activityName]
-  static final activityName =
-      QueryStringProperty<Event>(_entities[1].properties[1]);
-
-  /// see [Event.location]
-  static final location =
-      QueryStringProperty<Event>(_entities[1].properties[2]);
-
-  /// see [Event.nameOfReporter]
-  static final nameOfReporter =
-      QueryStringProperty<Event>(_entities[1].properties[3]);
-
-  /// see [Event.timeOfAttending]
-  static final timeOfAttending =
-      QueryStringProperty<Event>(_entities[1].properties[4]);
-
-  /// see [Event.dateHeld]
-  static final dateHeld =
-      QueryStringProperty<Event>(_entities[1].properties[5]);
-
-  /// see [Event.firebaseUuid]
+  /// see [EventObjectBoxModel.firebaseUuid]
   static final firebaseUuid =
-      QueryStringProperty<Event>(_entities[1].properties[6]);
+      QueryStringProperty<EventObjectBoxModel>(_entities[1].properties[1]);
+
+  /// see [EventObjectBoxModel.activityName]
+  static final activityName =
+      QueryStringProperty<EventObjectBoxModel>(_entities[1].properties[2]);
+
+  /// see [EventObjectBoxModel.location]
+  static final location =
+      QueryStringProperty<EventObjectBoxModel>(_entities[1].properties[3]);
+
+  /// see [EventObjectBoxModel.dateHeld]
+  static final dateHeld =
+      QueryStringProperty<EventObjectBoxModel>(_entities[1].properties[4]);
+
+  /// see [EventObjectBoxModel.timeOfAttending]
+  static final timeOfAttending =
+      QueryStringProperty<EventObjectBoxModel>(_entities[1].properties[5]);
+
+  /// see [EventObjectBoxModel.nameOfReporter]
+  static final nameOfReporter =
+      QueryStringProperty<EventObjectBoxModel>(_entities[1].properties[6]);
 }

@@ -4,116 +4,112 @@
   "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
   "entities": [
     {
-      "id": "1:1712885548659213481",
-      "lastPropertyId": "9:5944211553272414947",
-      "name": "Account",
+      "id": "1:894584066545555716",
+      "lastPropertyId": "8:2399310828962242081",
+      "name": "AccountObjectBoxModel",
       "flags": 2,
       "properties": [
         {
-          "id": "1:5996641448177981287",
+          "id": "1:6597798685354896383",
           "name": "id",
           "type": 6,
           "flags": 1
         },
         {
-          "id": "2:4715176537879985151",
+          "id": "2:6582088899059863461",
+          "name": "firebaseUuid",
+          "type": 9
+        },
+        {
+          "id": "3:1663060796973832565",
           "name": "name",
           "type": 9
         },
         {
-          "id": "3:7991796932316584492",
+          "id": "4:2695866292888030058",
           "name": "email",
           "type": 9,
           "flags": 34848,
-          "indexId": "1:9000978840175663253"
+          "indexId": "1:252866033431091166"
         },
         {
-          "id": "4:5221348918566422859",
+          "id": "5:8555954328618909407",
           "name": "password",
           "type": 9
         },
         {
-          "id": "5:8676105781591898063",
+          "id": "6:4716070175848106164",
           "name": "phone",
           "type": 9
         },
         {
-          "id": "6:7401069183167295865",
+          "id": "7:2984473658201382102",
           "name": "address",
           "type": 9
         },
         {
-          "id": "7:4277992262783764311",
+          "id": "8:2399310828962242081",
           "name": "avatarUrl",
-          "type": 9
-        },
-        {
-          "id": "9:5944211553272414947",
-          "name": "firebaseUuid",
           "type": 9
         }
       ],
       "relations": []
     },
     {
-      "id": "2:4286727007805480962",
-      "lastPropertyId": "9:7292600360333371458",
-      "name": "Event",
+      "id": "2:5284398797134205399",
+      "lastPropertyId": "7:353454845742527714",
+      "name": "EventObjectBoxModel",
       "flags": 2,
       "properties": [
         {
-          "id": "1:2732258002863280504",
+          "id": "1:1936299571483457156",
           "name": "id",
           "type": 6,
           "flags": 1
         },
         {
-          "id": "2:5475737996574946140",
+          "id": "2:3216595188538739249",
+          "name": "firebaseUuid",
+          "type": 9
+        },
+        {
+          "id": "3:4946678063010437102",
           "name": "activityName",
           "type": 9
         },
         {
-          "id": "3:147663942465862169",
+          "id": "4:3238622959118337526",
           "name": "location",
           "type": 9
         },
         {
-          "id": "5:1469399236199722966",
-          "name": "nameOfReporter",
-          "type": 9
-        },
-        {
-          "id": "6:2059717041332119832",
-          "name": "timeOfAttending",
-          "type": 9
-        },
-        {
-          "id": "7:8893305035485617619",
+          "id": "5:2060668512536966492",
           "name": "dateHeld",
           "type": 9
         },
         {
-          "id": "9:7292600360333371458",
-          "name": "firebaseUuid",
+          "id": "6:482198134027640257",
+          "name": "timeOfAttending",
+          "type": 9
+        },
+        {
+          "id": "7:353454845742527714",
+          "name": "nameOfReporter",
           "type": 9
         }
       ],
       "relations": []
     }
   ],
-  "lastEntityId": "2:4286727007805480962",
-  "lastIndexId": "1:9000978840175663253",
+  "lastEntityId": "2:5284398797134205399",
+  "lastIndexId": "1:252866033431091166",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
   "modelVersionParserMinimum": 5,
   "retiredEntityUids": [],
   "retiredIndexUids": [],
-  "retiredPropertyUids": [
-    2021490705418139639,
-    9216695209692139162,
-    3960270686729404293
-  ],
+  "retiredPropertyUids": [],
   "retiredRelationUids": [],
   "version": 1
 }

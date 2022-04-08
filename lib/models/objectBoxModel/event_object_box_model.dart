@@ -2,7 +2,7 @@ import 'package:objectbox/objectbox.dart';
 
 @Entity()
 @Sync()
-class Event {
+class EventObjectBoxModel {
   int id = 0;
   String firebaseUuid;
   String activityName;
@@ -11,7 +11,7 @@ class Event {
   String? timeOfAttending;
   String nameOfReporter;
 
-  Event({
+  EventObjectBoxModel({
     required this.firebaseUuid,
     required this.activityName,
     this.location,

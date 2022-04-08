@@ -9,7 +9,7 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:iexplore/homeScreen/home_screen.dart';
 import 'package:iexplore/main.dart';
-import 'package:iexplore/models/objectBoxModel/account.dart';
+import 'package:iexplore/models/objectBoxModel/account_object_box_model.dart';
 import 'package:iexplore/objectbox.g.dart';
 import 'package:iexplore/widgets/custom/custom_text_field.dart';
 import 'package:iexplore/widgets/error_dialog.dart';
@@ -135,6 +135,23 @@ class _AuthRegisterState extends State<AuthRegister> {
     }
   }
 
+  Future<void> readCurrentUserInLocal() async {
+    await FirebaseFirestore.instance
+        .collection("i-explore")
+        .doc(firebaseAuth.currentUser?.uid)
+        .get()
+        .then((snapshot) {
+      if (snapshot.exists) {
+        final query = accountObjectBox
+            .query(AccountObjectBoxModel_.email.equals(snapshot.data()!["email"]))
+            .build();
+        currentAccount = query.findFirst();
+
+        query.close();
+      }
+    });
+  }
+
   Future<void> authUserAndRegister() async {
     User? user;
 
@@ -165,6 +182,7 @@ class _AuthRegisterState extends State<AuthRegister> {
         phoneController.text,
         addressController.text,
       );
+      readCurrentUserInLocal();
       saveDataToFirebase(user!).then((value) {
         Navigator.pop(context);
         Route route = MaterialPageRoute(builder: (c) => const HomeScreen());
@@ -176,13 +194,13 @@ class _AuthRegisterState extends State<AuthRegister> {
   /// Save User Data
   Future<void> saveDataUserToObjectBox(String _uid, String _name, String _email,
       String _password, String _phone, String _address) async {
-    final query = accountObjectBox.query(Account_.email.equals(_email)).build();
+    final query = accountObjectBox.query(AccountObjectBoxModel_.email.equals(_email)).build();
     final userResults = query.find();
     query.close();
 
     if (userResults.isEmpty) {
       try {
-        await accountObjectBox.putAsync(Account(
+        await accountObjectBox.putAsync(AccountObjectBoxModel(
             firebaseUuid: _uid,
             name: _name.trim(),
             email: _email.trim(),
@@ -227,7 +245,6 @@ class _AuthRegisterState extends State<AuthRegister> {
       "avatarUrl": avatarUrl,
     });
   }
-
   /// End Save User Data
 
   @override

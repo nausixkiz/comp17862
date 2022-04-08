@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:iexplore/homeScreen/home_screen.dart';
 import 'package:iexplore/main.dart';
+import 'package:iexplore/objectbox.g.dart';
 import 'package:iexplore/widgets/custom/custom_text_field.dart';
 import 'package:iexplore/widgets/error_dialog.dart';
 import 'package:iexplore/widgets/loading.dart';
@@ -47,6 +49,7 @@ class _AuthLoginState extends State<AuthLogin> {
             email: emailController.text.trim(),
             password: passwordController.text.trim())
         .then((value) {
+      readCurrentUserInLocal();
       Navigator.pop(context);
       Navigator.push(
           context, MaterialPageRoute(builder: (c) => const HomeScreen()));
@@ -60,6 +63,23 @@ class _AuthLoginState extends State<AuthLogin> {
           return ErrorDialog(message: error.message.toString());
         },
       );
+    });
+  }
+
+  Future<void> readCurrentUserInLocal() async {
+    await FirebaseFirestore.instance
+        .collection("i-explore")
+        .doc(firebaseAuth.currentUser?.uid)
+        .get()
+        .then((snapshot) {
+      if (snapshot.exists) {
+        final query = accountObjectBox
+            .query(AccountObjectBoxModel_.email.equals(snapshot.data()!["email"]))
+            .build();
+        currentAccount = query.findFirst();
+
+        query.close();
+      }
     });
   }
 

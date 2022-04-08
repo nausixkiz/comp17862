@@ -1,9 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:iexplore/main.dart';
+import 'package:iexplore/models/firebaseModel/event_firebase_model.dart' as firebase_event_model;
 import 'package:iexplore/objectbox.g.dart';
 import 'package:iexplore/screen/upload/upload_report_about_event_screen.dart';
+import 'package:iexplore/widgets/event_list_widget.dart';
 import 'package:iexplore/widgets/home_drawer.dart';
+import 'package:iexplore/widgets/progress_bar.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -17,34 +21,6 @@ class _HomeScreenState extends State<HomeScreen> {
     "Welcome new user",
     style: TextStyle(fontSize: 20, fontFamily: "Lobster"),
   );
-
-  Future<void> readCurrentUserInLocal() async {
-    await FirebaseFirestore.instance
-        .collection("i-explore")
-        .doc(firebaseAuth.currentUser?.uid)
-        .get()
-        .then((snapshot) {
-      if (snapshot.exists) {
-        final query = accountObjectBox
-            .query(Account_.email.equals(snapshot.data()!["email"]))
-            .build();
-        currentAccount = query.findFirst();
-
-        query.close();
-        setState(() {
-          appBarTitleText = Text("Welcome " + currentAccount!.name,
-              style: const TextStyle(fontSize: 20, fontFamily: "Lobster"));
-        });
-      }
-    });
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    readCurrentUserInLocal();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +54,29 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       drawer: const HomeDrawer(),
-      body: const Center(),
+      body: CustomScrollView(
+        slivers: [
+          StreamBuilder<QuerySnapshot>(
+            stream: FirebaseFirestore.instance.collection("i-explore").doc(currentAccount!.firebaseUuid).collection("event").snapshots(),
+            builder: (context, snapshot) {
+              return !snapshot.hasData ?
+              SliverToBoxAdapter(child: circularProgress(),) :
+              SliverStaggeredGrid.countBuilder(
+                crossAxisCount: 2,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 12,
+                staggeredTileBuilder: (context) =>  const StaggeredTile.fit(1),
+                // itemCount: imageList.length,
+                itemBuilder: (context, index) {
+                  firebase_event_model.EventFirebaseModel eventModel = firebase_event_model.EventFirebaseModel.fromJson(snapshot.data!.docs[index].data()! as Map<String, dynamic>);
+                  return EventListWidget(model: eventModel, context: context,);
+                },
+                itemCount: snapshot.data!.docs.length,
+              );
+            },
+          )
+        ],
+      ),
     );
   }
 }

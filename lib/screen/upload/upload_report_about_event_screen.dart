@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:iexplore/homeScreen/home_screen.dart';
 import 'package:iexplore/main.dart';
-import 'package:iexplore/models/objectBoxModel/event.dart' as object_box_event_model;
+import 'package:iexplore/models/objectBoxModel/event_object_box_model.dart' as object_box_event_model;
 import 'package:iexplore/objectbox.g.dart';
 import 'package:iexplore/widgets/custom/custom_date_picker_text_field.dart';
 import 'package:iexplore/widgets/custom/custom_time_picker_text_field.dart';
@@ -44,7 +44,7 @@ class _UploadReportAboutEventScreen extends State<UploadReportAboutEventScreen> 
     });
 
     try {
-      await eventObjectBox.putAsync(object_box_event_model.Event(
+      await eventObjectBox.putAsync(object_box_event_model.EventObjectBoxModel(
           firebaseUuid: _uuid,
           activityName: _activityName,
           location: _location,

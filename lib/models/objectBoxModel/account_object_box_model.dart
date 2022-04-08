@@ -2,7 +2,7 @@ import 'package:objectbox/objectbox.dart';
 
 @Entity()
 @Sync()
-class Account {
+class AccountObjectBoxModel {
   // Annotate with @Id() if name isn't "id" (case insensitive).
   int id = 0;
   String firebaseUuid;
@@ -14,7 +14,7 @@ class Account {
   String address;
   String avatarUrl;
 
-  Account({
+  AccountObjectBoxModel({
     required this.firebaseUuid,
     required this.name,
     required this.email,
