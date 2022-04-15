@@ -1,8 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:crypt/crypt.dart';
 import 'package:flutter/material.dart';
-import 'package:iexplore/homeScreen/home_screen.dart';
+import 'package:iexplore/auth/auth_screen.dart';
 import 'package:iexplore/main.dart';
+import 'package:iexplore/models/objectBoxModel/account_object_box_model.dart';
 import 'package:iexplore/objectbox.g.dart';
+import 'package:iexplore/screen/home/home_screen.dart';
 import 'package:iexplore/widgets/custom/custom_text_field.dart';
 import 'package:iexplore/widgets/error_dialog.dart';
 import 'package:iexplore/widgets/loading.dart';
@@ -34,6 +37,56 @@ class _AuthLoginState extends State<AuthLogin> {
     }
   }
 
+  Future<void> saveDataUserToObjectBox(
+      String _uid,
+      String _name,
+      String _email,
+      String _password,
+      String _phone,
+      String _address,
+      String _avatarUrl) async {
+    final query = accountObjectBox
+        .query(AccountObjectBoxModel_.email.equals(_email))
+        .build();
+    final userResults = query.find();
+    query.close();
+
+    if (userResults.isEmpty) {
+      try {
+        await accountObjectBox.putAsync(AccountObjectBoxModel(
+            firebaseUuid: _uid,
+            name: _name.trim(),
+            email: _email.trim(),
+            password: Crypt.sha512(_password.trim()).toString(),
+            phone: _phone.trim(),
+            address: _address.trim(),
+            avatarUrl: _avatarUrl));
+      } on UniqueViolationException catch (e) {
+        showDialog<void>(
+          context: context,
+          barrierDismissible: true,
+          // false = user must tap button, true = tap outside dialog
+          builder: (BuildContext dialogContext) {
+            return ErrorDialog(
+              message: e.message.toString(),
+            );
+          },
+        );
+      }
+    } else {
+      showDialog<void>(
+        context: context,
+        barrierDismissible: true,
+        // false = user must tap button, true = tap outside dialog
+        builder: (BuildContext dialogContext) {
+          return ErrorDialog(
+            message: "This user is already exists",
+          );
+        },
+      );
+    }
+  }
+
   Future<void> authLogin() async {
     showDialog<void>(
       context: context,
@@ -48,11 +101,33 @@ class _AuthLoginState extends State<AuthLogin> {
         .signInWithEmailAndPassword(
             email: emailController.text.trim(),
             password: passwordController.text.trim())
-        .then((value) {
-      readCurrentUserInLocal();
-      Navigator.pop(context);
-      Navigator.push(
-          context, MaterialPageRoute(builder: (c) => const HomeScreen()));
+        .then((user) async {
+      await FirebaseFirestore.instance
+          .collection("i-explore")
+          .doc(user.user!.uid)
+          .get()
+          .then((snapshot) async {
+        if (snapshot.exists) {
+          await saveDataUserToObjectBox(
+            user.user!.uid,
+            snapshot.data()!["name"],
+            snapshot.data()!["email"],
+            snapshot.data()!["password"],
+            snapshot.data()!["phone"],
+            snapshot.data()!["address"],
+            snapshot.data()!["avatarUrl"],
+          );
+          readAndSetCurrentAccount(snapshot.data()!["email"]);
+          Navigator.pop(context);
+          Navigator.push(
+              context, MaterialPageRoute(builder: (c) => const HomeScreen()));
+        } else {
+          firebaseAuth.signOut();
+          Navigator.pop(context);
+          Navigator.push(
+              context, MaterialPageRoute(builder: (c) => const AuthScreen()));
+        }
+      });
     }).catchError((error) {
       Navigator.pop(context);
       showDialog<void>(
@@ -66,21 +141,12 @@ class _AuthLoginState extends State<AuthLogin> {
     });
   }
 
-  Future<void> readCurrentUserInLocal() async {
-    await FirebaseFirestore.instance
-        .collection("i-explore")
-        .doc(firebaseAuth.currentUser?.uid)
-        .get()
-        .then((snapshot) {
-      if (snapshot.exists) {
-        final query = accountObjectBox
-            .query(AccountObjectBoxModel_.email.equals(snapshot.data()!["email"]))
-            .build();
-        currentAccount = query.findFirst();
-
-        query.close();
-      }
-    });
+  Future<void> readAndSetCurrentAccount(String _email) async {
+    final query = accountObjectBox
+        .query(AccountObjectBoxModel_.email.equals(_email))
+        .build();
+    currentAccount = query.findFirst();
+    query.close();
   }
 
   @override

@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:iexplore/auth/auth_screen.dart';
-import 'package:iexplore/homeScreen/home_screen.dart';
 import 'package:iexplore/main.dart';
+import 'package:iexplore/screen/home/home_screen.dart';
 
 class MasterSplashScreen extends StatefulWidget {
   const MasterSplashScreen({Key? key}) : super(key: key);
@@ -35,34 +35,48 @@ class _MasterSplashScreenState extends State<MasterSplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: Container(
-        color: Colors.white,
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Image.asset("images/splash.jpg"),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              const Padding(
-                padding: EdgeInsets.all(18.0),
-                child: Text(
-                  "iExplore",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.black54,
-                    fontSize: 40,
-                    fontFamily: "Signatra",
-                    letterSpacing: 3,
+    return Scaffold(
+      appBar: AppBar(
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+              gradient: LinearGradient(
+            colors: [
+              Colors.red,
+              Colors.deepOrange,
+            ],
+            begin: FractionalOffset(0.0, 0.0),
+            end: FractionalOffset(1.0, 0.0),
+            stops: [0.0, 1.0],
+            tileMode: TileMode.clamp,
+          )),
+        ),
+        title: const Text("iExplore",
+            style: TextStyle(fontSize: 20, fontFamily: "Lobster")),
+        centerTitle: true,
+        automaticallyImplyLeading: true,
+      ),
+      body: Material(
+        child: Container(
+          color: Colors.white,
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Padding(
+                  padding: EdgeInsets.all(18.0),
+                  child: Text(
+                    "Welcome to iExplore",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.black54,
+                      fontSize: 40,
+                      fontFamily: "Signatra",
+                      letterSpacing: 3,
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

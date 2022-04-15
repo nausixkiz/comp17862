@@ -12,9 +12,11 @@ import 'package:iexplore/splashScreen/splash_screen.dart';
 /// Global variable
 final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 late ObjectBox objectbox;
-Box<AccountObjectBoxModel> accountObjectBox = objectbox.store.box<AccountObjectBoxModel>();
-Box<EventObjectBoxModel> eventObjectBox = objectbox.store.box<EventObjectBoxModel>();
-late AccountObjectBoxModel? currentAccount;
+Box<AccountObjectBoxModel> accountObjectBox =
+    objectbox.store.box<AccountObjectBoxModel>();
+Box<EventObjectBoxModel> eventObjectBox =
+    objectbox.store.box<EventObjectBoxModel>();
+AccountObjectBoxModel? currentAccount;
 
 Uint8List secret =
     Uint8List.fromList([0, 46, 79, 193, 185, 65, 73, 239, 15, 5]);
@@ -22,7 +24,9 @@ SyncCredentials credentials = SyncCredentials.sharedSecretUint8List(secret);
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    //options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   objectbox = await ObjectBox.create();
   if (Sync.isAvailable()) {

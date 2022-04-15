@@ -5,6 +5,8 @@ class EventFirebaseModel {
   String? dateHeld;
   String? timeOfAttending;
   String? nameOfReporter;
+  String? thumpUrl;
+  String? report;
 
   EventFirebaseModel({
     this.firebaseUuid,
@@ -13,6 +15,8 @@ class EventFirebaseModel {
     this.dateHeld,
     this.timeOfAttending,
     this.nameOfReporter,
+    this.thumpUrl,
+    this.report,
   });
 
   EventFirebaseModel.fromJson(Map<String, dynamic> json) {
@@ -22,6 +26,8 @@ class EventFirebaseModel {
     dateHeld = json["dateHeld"];
     timeOfAttending = json["timeOfAttending"];
     nameOfReporter = json["nameOfReporter"];
+    thumpUrl = json["thumpUrl"];
+    report = json["report"];
   }
 
   Map<String, dynamic> toJson() {
@@ -33,6 +39,8 @@ class EventFirebaseModel {
     data["dateHeld"] = dateHeld;
     data["timeOfAttending"] = timeOfAttending;
     data["nameOfReporter"] = nameOfReporter;
+    data["thumpUrl"] = thumpUrl;
+    data["report"] = report;
 
     return data;
   }

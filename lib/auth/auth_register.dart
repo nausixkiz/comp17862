@@ -3,14 +3,12 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crypt/crypt.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart' as f_storage;
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:iexplore/homeScreen/home_screen.dart';
 import 'package:iexplore/main.dart';
-import 'package:iexplore/models/objectBoxModel/account_object_box_model.dart';
-import 'package:iexplore/objectbox.g.dart';
+import 'package:iexplore/screen/home/home_screen.dart';
 import 'package:iexplore/widgets/custom/custom_text_field.dart';
 import 'package:iexplore/widgets/error_dialog.dart';
 import 'package:iexplore/widgets/loading.dart';
@@ -96,14 +94,12 @@ class _AuthRegisterState extends State<AuthRegister> {
           );
           String imageFileName =
               DateTime.now().millisecondsSinceEpoch.toString();
-          f_storage.Reference reference = f_storage.FirebaseStorage.instance
+          Reference reference = FirebaseStorage.instance
               .ref()
               .child("i-explore")
               .child(imageFileName);
-          f_storage.UploadTask uploadTask =
-              reference.putFile(File(imageXFile!.path));
-          f_storage.TaskSnapshot taskSnapshot =
-              await uploadTask.whenComplete(() => {});
+          UploadTask uploadTask = reference.putFile(File(imageXFile!.path));
+          TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() => {});
           await taskSnapshot.ref.getDownloadURL().then((value) {
             avatarUrl = value;
             authUserAndRegister();
@@ -135,23 +131,6 @@ class _AuthRegisterState extends State<AuthRegister> {
     }
   }
 
-  Future<void> readCurrentUserInLocal() async {
-    await FirebaseFirestore.instance
-        .collection("i-explore")
-        .doc(firebaseAuth.currentUser?.uid)
-        .get()
-        .then((snapshot) {
-      if (snapshot.exists) {
-        final query = accountObjectBox
-            .query(AccountObjectBoxModel_.email.equals(snapshot.data()!["email"]))
-            .build();
-        currentAccount = query.findFirst();
-
-        query.close();
-      }
-    });
-  }
-
   Future<void> authUserAndRegister() async {
     User? user;
 
@@ -159,8 +138,17 @@ class _AuthRegisterState extends State<AuthRegister> {
         .createUserWithEmailAndPassword(
             email: emailController.text.trim(),
             password: passwordController.text.trim())
-        .then((value) => {user = value.user})
-        .catchError((error) {
+        .then((value) {
+      firebaseAuth.currentUser!.updateDisplayName(nameController.text.trim());
+      firebaseAuth.currentUser!.updatePhotoURL(avatarUrl);
+      // firebaseAuth.currentUser!.updatePhoneNumber(phoneController.text);
+      saveDataToFirebase(value.user!).then((value) {
+        Navigator.pop(context);
+        //send user to homePage
+        Route newRoute = MaterialPageRoute(builder: (c) => const HomeScreen());
+        Navigator.pushReplacement(context, newRoute);
+      });
+    }).catchError((error) {
       Navigator.pop(context);
       showDialog<void>(
         context: context,
@@ -173,69 +161,10 @@ class _AuthRegisterState extends State<AuthRegister> {
         },
       );
     });
-    if (user != null) {
-      saveDataUserToObjectBox(
-        user!.uid,
-        nameController.text,
-        emailController.text,
-        passwordController.text,
-        phoneController.text,
-        addressController.text,
-      );
-      readCurrentUserInLocal();
-      saveDataToFirebase(user!).then((value) {
-        Navigator.pop(context);
-        Route route = MaterialPageRoute(builder: (c) => const HomeScreen());
-        Navigator.pushReplacement(context, route);
-      });
-    }
-  }
-
-  /// Save User Data
-  Future<void> saveDataUserToObjectBox(String _uid, String _name, String _email,
-      String _password, String _phone, String _address) async {
-    final query = accountObjectBox.query(AccountObjectBoxModel_.email.equals(_email)).build();
-    final userResults = query.find();
-    query.close();
-
-    if (userResults.isEmpty) {
-      try {
-        await accountObjectBox.putAsync(AccountObjectBoxModel(
-            firebaseUuid: _uid,
-            name: _name.trim(),
-            email: _email.trim(),
-            password: Crypt.sha512(_password.trim()).toString(),
-            phone: _phone.trim(),
-            address: _address.trim(),
-            avatarUrl: avatarUrl));
-      } on UniqueViolationException catch (e) {
-        showDialog<void>(
-          context: context,
-          barrierDismissible: true,
-          // false = user must tap button, true = tap outside dialog
-          builder: (BuildContext dialogContext) {
-            return ErrorDialog(
-              message: e.message.toString(),
-            );
-          },
-        );
-      }
-    } else {
-      showDialog<void>(
-        context: context,
-        barrierDismissible: true,
-        // false = user must tap button, true = tap outside dialog
-        builder: (BuildContext dialogContext) {
-          return ErrorDialog(
-            message: "This user is already exists",
-          );
-        },
-      );
-    }
   }
 
   Future<void> saveDataToFirebase(User user) async {
-    FirebaseFirestore.instance.collection("i-explore").doc(user.uid).set({
+    await FirebaseFirestore.instance.collection("i-explore").doc(user.uid).set({
       "uid": user.uid,
       "name": nameController.text.trim(),
       "email": user.email,
@@ -245,7 +174,6 @@ class _AuthRegisterState extends State<AuthRegister> {
       "avatarUrl": avatarUrl,
     });
   }
-  /// End Save User Data
 
   @override
   Widget build(BuildContext context) {

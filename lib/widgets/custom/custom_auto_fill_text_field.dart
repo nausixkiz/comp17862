@@ -4,7 +4,7 @@ class CustomAutoFillTextField extends StatelessWidget {
   final TextEditingController controller;
   final IconData? iconData;
   final String text;
-  final String textFill;
+  final String? textFill;
   final bool isObscure = false;
   final bool isEnabled = true;
 
@@ -12,7 +12,7 @@ class CustomAutoFillTextField extends StatelessWidget {
     required this.controller,
     this.iconData,
     required this.text,
-    required this.textFill,
+    this.textFill,
   });
 
   @override
@@ -31,7 +31,7 @@ class CustomAutoFillTextField extends StatelessWidget {
         cursorColor: Theme.of(context).primaryColor,
         onTap: () {
           if (controller.text.isEmpty) {
-            controller.text = textFill;
+            controller.text = textFill!;
           }
         },
         decoration: InputDecoration(
