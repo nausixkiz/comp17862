@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crypt/crypt.dart';
 import 'package:flutter/material.dart';
-import 'package:iexplore/auth/auth_screen.dart';
 import 'package:iexplore/main.dart';
 import 'package:iexplore/models/objectBoxModel/account_object_box_model.dart';
 import 'package:iexplore/objectbox.g.dart';
+import 'package:iexplore/screen/auth/auth_screen.dart';
 import 'package:iexplore/screen/home/home_screen.dart';
 import 'package:iexplore/widgets/custom/custom_text_field.dart';
 import 'package:iexplore/widgets/error_dialog.dart';

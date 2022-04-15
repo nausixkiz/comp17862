@@ -1,8 +1,10 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:iexplore/auth/auth_screen.dart';
 import 'package:iexplore/main.dart';
 import 'package:iexplore/models/firebaseModel/event_firebase_model.dart';
+import 'package:iexplore/screen/auth/auth_screen.dart';
 import 'package:iexplore/screen/event/event_create_screen.dart';
 import 'package:iexplore/screen/event/search_event_screen.dart';
 import 'package:iexplore/widgets/list_all_event_widget.dart';
@@ -23,9 +25,11 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    setState(() {
-      name = firebaseAuth.currentUser!.displayName!;
-      avatarUrl = firebaseAuth.currentUser!.photoURL!;
+    Timer(const Duration(seconds: 3), () async {
+      setState(() {
+        name = firebaseAuth.currentUser!.displayName!;
+        avatarUrl = firebaseAuth.currentUser!.photoURL!;
+      });
     });
   }
 

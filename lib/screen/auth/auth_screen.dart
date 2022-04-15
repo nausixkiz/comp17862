@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:iexplore/auth/auth_login.dart';
-import 'package:iexplore/auth/auth_register.dart';
-// import 'package:iexplore/extensions/color_extension.dart';
+import 'package:iexplore/screen/auth/auth_register.dart';
+import 'package:iexplore/screen/auth/auth_login.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({Key? key}) : super(key: key);

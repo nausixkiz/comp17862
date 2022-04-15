@@ -7,7 +7,7 @@ import 'package:iexplore/extensions/object_box.dart';
 import 'package:iexplore/models/objectBoxModel/account_object_box_model.dart';
 import 'package:iexplore/models/objectBoxModel/event_object_box_model.dart';
 import 'package:iexplore/objectbox.g.dart';
-import 'package:iexplore/splashScreen/splash_screen.dart';
+import 'package:iexplore/screen/splash/splash_screen.dart';
 
 /// Global variable
 final FirebaseAuth firebaseAuth = FirebaseAuth.instance;

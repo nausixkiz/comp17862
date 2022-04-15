@@ -21,12 +21,7 @@ class _SearchEventScreenState extends State<SearchEventScreen> {
         .collection("i-explore/")
         .doc(firebaseAuth.currentUser!.uid)
         .collection("events")
-        .where("activityName", isEqualTo: searchText);
-    // .withConverter<EventFirebaseModel>(
-    //   fromFirestore: (snapshot, _) =>
-    //       EventFirebaseModel.fromJson(snapshot.data()!),
-    //   toFirestore: (event, _) => event.toJson(),
-    // );
+        .where("activityName", isGreaterThanOrEqualTo: searchText);
     eventQuerySnapshot = instance.get();
 
     return await instance.get();

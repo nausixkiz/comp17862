@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:iexplore/auth/auth_screen.dart';
 import 'package:iexplore/main.dart';
+import 'package:iexplore/screen/auth/auth_screen.dart';
 import 'package:iexplore/screen/home/home_screen.dart';
 
 class MasterSplashScreen extends StatefulWidget {
