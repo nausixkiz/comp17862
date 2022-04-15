@@ -140,8 +140,7 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    "Reports: " +
-                        widget.eventModel!.report.toString(),
+                    "Reports: " + widget.eventModel!.report.toString(),
                     textAlign: TextAlign.justify,
                     style: const TextStyle(
                         fontWeight: FontWeight.normal, fontSize: 14),

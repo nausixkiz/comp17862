@@ -25,8 +25,8 @@ SyncCredentials credentials = SyncCredentials.sharedSecretUint8List(secret);
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    //options: DefaultFirebaseOptions.currentPlatform,
-  );
+      //options: DefaultFirebaseOptions.currentPlatform,
+      );
 
   objectbox = await ObjectBox.create();
   if (Sync.isAvailable()) {

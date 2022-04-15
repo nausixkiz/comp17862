@@ -216,14 +216,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   int eventItemCount = snapshot.data!.docs.length;
 
                   if (snapshot.hasData) {
-                    if(eventItemCount < 1){
+                    if (eventItemCount < 1) {
                       return Center(
                           child: Column(
-                            children: const <Widget>[
-                              Padding(padding: EdgeInsets.only(top: 50.0)),
-                              Text("No event found.")
-                            ],
-                          ));
+                        children: const <Widget>[
+                          Padding(padding: EdgeInsets.only(top: 50.0)),
+                          Text("No event found.")
+                        ],
+                      ));
                     }
                     return GridView.builder(
                         itemCount: eventItemCount,
